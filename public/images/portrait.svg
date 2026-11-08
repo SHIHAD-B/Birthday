@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#151B30"/>
+      <stop offset="55%" stop-color="#24172E"/>
+      <stop offset="100%" stop-color="#0B1020"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#D9A5AD" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#D9A5AD" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#glow)"/>
+  <circle cx="400" cy="380" r="110" fill="#E8C89E" fill-opacity="0.18"/>
+  <circle cx="400" cy="360" r="70" fill="#FFF6ED" fill-opacity="0.2"/>
+  <ellipse cx="400" cy="560" rx="140" ry="160" fill="#FFF6ED" fill-opacity="0.12"/>
+  <text x="400" y="780" text-anchor="middle" fill="#E8C89E" font-family="Georgia, serif" font-size="36">Your Photo</text>
+  <text x="400" y="830" text-anchor="middle" fill="#B8AEC5" font-family="Georgia, serif" font-size="20">Replace /public/images/portrait.jpg</text>
+</svg>

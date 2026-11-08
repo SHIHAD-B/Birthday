@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100" fill="none">
+  <defs>
+    <linearGradient id="m" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#24172E"/>
+      <stop offset="100%" stop-color="#151B30"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#m)"/>
+  <circle cx="220" cy="180" r="3" fill="#E8C89E" opacity="0.8"/>
+  <circle cx="680" cy="260" r="2" fill="#D9A5AD" opacity="0.8"/>
+  <circle cx="480" cy="140" r="2.5" fill="#FFF6ED" opacity="0.7"/>
+  <circle cx="450" cy="480" r="120" fill="#E8C89E" fill-opacity="0.12"/>
+  <path d="M450 560 C450 560 360 500 360 440 C360 410 382 390 408 390 C428 390 442 402 450 418 C458 402 472 390 492 390 C518 390 540 410 540 440 C540 500 450 560 450 560Z" fill="#D9A5AD" fill-opacity="0.55"/>
+  <text x="450" y="760" text-anchor="middle" fill="#FFF6ED" font-family="Georgia, serif" font-size="34">A Memory</text>
+  <text x="450" y="810" text-anchor="middle" fill="#B8AEC5" font-family="Georgia, serif" font-size="20">Add your photo here</text>
+</svg>
