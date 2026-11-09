@@ -167,7 +167,7 @@ export const siteConfig = {
       icon: "sparkles",
     },
     {
-      date: "16 April 2025",
+      date: "15 April 2025",
       title: "Our First Conversation",
       description:
         "Do you remember our first conversation? It was the very next day after my birthday. From that conversation itself, I felt a soulmate connection. And I will never forget your birthday wish on that day.",
