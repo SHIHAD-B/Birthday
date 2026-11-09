@@ -72,7 +72,7 @@ export function StoryTimeline() {
                       <h3 className="font-serif text-2xl text-ivory">
                         {milestone.title}
                       </h3>
-                      <p className="mt-2 text-sm md:text-base leading-relaxed text-muted">
+                      <p className="mt-2 text-sm md:text-base leading-relaxed text-muted whitespace-pre-line">
                         {milestone.description}
                       </p>
                       {milestone.image ? (

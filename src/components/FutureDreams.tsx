@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import {
   Camera,
   Car,
+  Footprints,
   Music,
   Plane,
   Sunrise,
@@ -19,6 +20,7 @@ const iconMap = {
   utensils: Utensils,
   music: Music,
   camera: Camera,
+  walk: Footprints,
 };
 
 export function FutureDreams() {

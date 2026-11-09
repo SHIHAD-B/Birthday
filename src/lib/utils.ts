@@ -5,8 +5,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Convert a Spotify playlist URL into an embeddable URL.
+ * Convert a Spotify playlist or track URL into an embeddable URL.
  * Returns null when the URL is empty or unsupported.
+ * Embeds never autoplay until the user presses play inside the player.
  */
 export function toSpotifyEmbedUrl(url: string): string | null {
   const trimmed = url.trim();
@@ -22,10 +23,17 @@ export function toSpotifyEmbedUrl(url: string): string | null {
       return null;
     }
 
-    const match = parsed.pathname.match(/\/playlist\/([a-zA-Z0-9]+)/);
-    if (!match) return null;
+    const playlist = parsed.pathname.match(/\/playlist\/([a-zA-Z0-9]+)/);
+    if (playlist) {
+      return `https://open.spotify.com/embed/playlist/${playlist[1]}?utm_source=generator&theme=0`;
+    }
 
-    return `https://open.spotify.com/embed/playlist/${match[1]}?utm_source=generator&theme=0`;
+    const track = parsed.pathname.match(/\/track\/([a-zA-Z0-9]+)/);
+    if (track) {
+      return `https://open.spotify.com/embed/track/${track[1]}?utm_source=generator&theme=0`;
+    }
+
+    return null;
   } catch {
     return null;
   }

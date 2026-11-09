@@ -44,15 +44,10 @@ export function PhotoFallback({
         <div className="relative z-10 flex flex-col items-center gap-2 px-4 text-center">
           <Heart className="h-7 w-7 text-champagne/70" aria-hidden="true" />
           <p className="font-script text-xl text-ivory/80">A memory waiting</p>
-          <p className="text-[0.65rem] tracking-wider uppercase text-muted">
-            Add photo in /public/images
-          </p>
         </div>
       </div>
     );
   }
-
-  const isSvg = src.toLowerCase().endsWith(".svg");
 
   if (fill) {
     return (
@@ -62,7 +57,7 @@ export function PhotoFallback({
         fill
         sizes={sizes}
         priority={priority}
-        unoptimized={isSvg}
+        unoptimized
         className={cn("object-cover", imageClassName)}
         onError={() => setFailed(true)}
       />
@@ -77,7 +72,7 @@ export function PhotoFallback({
       height={height ?? 1000}
       sizes={sizes}
       priority={priority}
-      unoptimized={isSvg}
+      unoptimized
       className={cn(imageClassName, className)}
       onError={() => setFailed(true)}
     />

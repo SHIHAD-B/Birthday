@@ -31,7 +31,7 @@ export type OpenWhenLetter = {
 export type FutureDream = {
   title: string;
   description: string;
-  icon?: "sunrise" | "plane" | "car" | "utensils" | "music" | "camera";
+  icon?: "sunrise" | "plane" | "car" | "utensils" | "music" | "camera" | "walk";
 };
 
 export type SongNote = {
@@ -40,15 +40,28 @@ export type SongNote = {
   note: string;
 };
 
+export type SpotifyTrack = {
+  title: string;
+  artist: string;
+  /** Optional Spotify link (opens externally) */
+  url?: string;
+  /**
+   * Local audio file under /public/audio (e.g. "/audio/song.mp3").
+   * Add your own legally owned MP3s — do not use pirated downloads.
+   */
+  src?: string;
+  note?: string;
+};
+
 export const siteConfig = {
   // --- Names (DEMO PLACEHOLDERS) ---
-  boyfriendName: "[BOYFRIEND_NAME]",
-  girlfriendName: "[GIRLFRIEND_NAME]",
+  boyfriendName: "Better Half",
+  girlfriendName: "Meghanandhana",
 
   // --- Dates (DEMO PLACEHOLDERS) ---
   birthday: "2001-08-20",
   /** ISO 8601 with timezone offset — used by the live relationship timer */
-  committedAt: "2024-02-14T00:00:00+04:00",
+  committedAt: "2025-04-15T00:00:00+04:00",
 
   // --- SEO ---
   siteTitle: "Happy Birthday, My Love ♡",
@@ -60,8 +73,8 @@ export const siteConfig = {
   heroEyebrow: "TO MY FAVORITE HUMAN",
   heroSubtitle:
     "Of all the stories in the universe,\nours will always be my favorite.",
-  heroPortraitSrc: "/images/portrait.svg",
-  heroPortraitAlt: "A soft portrait placeholder — replace with your photo",
+  heroPortraitSrc: "/images/hero-portrait.jpg",
+  heroPortraitAlt: "A portrait of my better half",
 
   // --- Music ---
   /** Paste a Spotify playlist URL (e.g. https://open.spotify.com/playlist/...) */
@@ -69,110 +82,123 @@ export const siteConfig = {
   /** Optional local MP3 path, e.g. "/audio/background.mp3" */
   backgroundAudioUrl: "",
 
-  songNotes: [
+  /**
+   * Local playlist — put MP3/M4A files in /public/audio with these names
+   * (or change the src paths). Playback starts only after you press play.
+   */
+  spotifyTracks: [
     {
-      title: "Our Song (Demo)",
-      artist: "Favorite Artist",
+      title: "Nenjin Ezhuth",
+      artist: "Our song",
+      url: "https://open.spotify.com/track/7Et1EN5V7xAyPjYOk8nSh3",
+      src: "/audio/nenjin-ezhuth.mp3",
       note: "Every time this plays, I think of you.",
     },
     {
-      title: "Late Night Drive (Demo)",
-      artist: "Another Artist",
+      title: "Minnalvala",
+      artist: "Sid Sriram · Narivetta",
+      url: "https://open.spotify.com/track/5yAfCVJwa3r9wAQSOfawqm",
+      src: "/audio/minnalvala.mp3",
       note: "This one feels like all our quiet moments.",
     },
     {
-      title: "Soft Glow (Demo)",
-      artist: "Someone Special",
+      title: "The Life of Ram",
+      artist: "Our song",
+      url: "https://open.spotify.com/track/3hXX5v2JaVqDR3aeQcPAU9",
+      src: "/audio/the-life-of-ram.mp3",
       note: "It sounds like coming home to you.",
     },
-  ] as SongNote[],
+    {
+      title: "Pagal Iravai | Maraigirai",
+      artist: "Our song",
+      url: "https://open.spotify.com/track/2jQQTuzwJWEtwayffAADIe",
+      src: "/audio/pagal-iravai.mp3",
+      note: "Our soft night song.",
+    },
+  ] as SpotifyTrack[],
 
-  // --- Photos (DEMO PLACEHOLDERS — add real files under /public/images) ---
+  songNotes: [] as SongNote[],
+
+  // --- Photos (unique images only; hero portrait is separate) ---
   photos: [
     {
-      src: "/images/memory.svg",
+      src: "/images/memory-1.jpg",
       caption: "If I could relive one day, I'd probably choose the one with you.",
-      date: "Demo · Spring",
-      alt: "Demo memory photo placeholder 1",
+      date: "A little moment, a big memory",
+      alt: "A special memory together",
       featured: true,
       polaroid: true,
     },
     {
-      src: "/images/memory.svg",
+      src: "/images/memory-2.jpg",
       caption: "A quiet little moment that somehow became everything.",
-      date: "Demo · Summer",
-      alt: "Demo memory photo placeholder 2",
+      date: "Us",
+      alt: "Memory photo 2",
     },
     {
-      src: "/images/memory.svg",
+      src: "/images/memory-3.jpg",
       caption: "Laughing until we forgot what started it.",
-      date: "Demo · Autumn",
-      alt: "Demo memory photo placeholder 3",
+      date: "Us",
+      alt: "Memory photo 3",
       polaroid: true,
     },
     {
-      src: "/images/memory.svg",
+      src: "/images/memory-4.jpg",
       caption: "Golden hour looked better next to you.",
-      date: "Demo · Evening",
-      alt: "Demo memory photo placeholder 4",
+      date: "Us",
+      alt: "Memory photo 4",
     },
     {
-      src: "/images/memory.svg",
-      caption: "The kind of ordinary day I never want to forget.",
-      date: "Demo · Weekend",
-      alt: "Demo memory photo placeholder 5",
-    },
-    {
-      src: "/images/memory.svg",
+      src: "/images/memory-5.jpg",
       caption: "Proof that home can be a person.",
-      date: "Demo · Night",
-      alt: "Demo memory photo placeholder 6",
+      date: "Us",
+      alt: "Memory photo 5",
       polaroid: true,
     },
   ] as Photo[],
 
-  // --- Timeline (DEMO PLACEHOLDERS — not real milestones) ---
+  // --- Timeline ---
   milestones: [
     {
-      date: "Demo Date",
+      date: "15 April 2025 · ~12:15 PM",
       title: "The Day We Met",
       description:
-        "Replace this with the real story — the first glance, the first hello, the beginning of everything.",
+        "From that day, around 12:15 pm, we saw each other and got lost in each other's eyes. That was the first melting moment of our journey. Thank you for coming into my life — I love you.\n\nThat was a special day alle etta.... Enikk ippozhum oormmayind — Njan Preethi Silks il kayariyathum Shebinettane kandu. Then njn ettanu text cheythu \"Your frnd is here, Shebin I think\". Nn kelkkenda thamasam njn nokkumbol, dhoore ninn oral varunnu — minnayam pole kandu. Njn mind aakkiyilla. Then ettan staircase lott kayariyille — ah tym il ahn njn ettane nokkiyath. Ettan also enne nokkunnayrunu. That was our first eye contact. Heart beat ellam kooduthal aayrunu. Ntha athine parayendath — magic aano, soul connection aano — onnum ariyilla. It was very, very special to both of us.",
       icon: "sparkles",
     },
     {
-      date: "Demo Date",
+      date: "16 April 2025",
       title: "Our First Conversation",
       description:
-        "The words that somehow felt easy. Edit this with the detail only the two of you would know.",
+        "Do you remember our first conversation? It was the very next day after my birthday. From that conversation itself, I felt a soulmate connection. And I will never forget your birthday wish on that day.",
       icon: "coffee",
     },
     {
-      date: "Demo Date",
+      date: "Our Kochi Date",
       title: "Our First Date",
       description:
-        "Nerves, laughter, and the quiet realization that time moved differently with you.",
+        "Our most awaited first date. From the day we started talking, I had dreamed of a Kochi date with you. By God's grace, it happened in a short time. On that day, we covered almost all the places I had wished to visit with you, especially in my college.",
       icon: "heart",
     },
     {
-      date: "Demo Date",
+      date: "Thrissur Railway Station",
       title: "The Day We Became Us",
       description:
-        "Not a dramatic movie scene — just a soft, certain kind of yes. Personalize this freely.",
+        "For the very first time in my life, I held the hand of my special one. At that moment, I truly felt the magic of holding hands. Yes, it was at Thrissur Railway Station with a slow, romantic song playing. I just got goosebumps.",
       icon: "star",
     },
     {
-      date: "Demo Date",
+      date: "A rainy night",
       title: "Our Favorite Adventure",
       description:
-        "A trip, a walk, a night that still lives rent-free in both your hearts. Tell it here.",
+        "We will never forget the day we went for a rainy night ride. It was such a beautiful experience. Thank you so much, love, for that. Also, that thattukada food + rain + night ride + you — that was a magical moment.",
       icon: "map",
     },
     {
       date: "Today",
       title: "Today, Your Birthday",
       description:
-        "Another year of you — and another reason I'm grateful the universe made us find each other.",
+        "On your special day, I'm very grateful to have you in my life. Today, I wish all your dreams come true and that you achieve everything you dream of. I promise I will always be here for you — no matter what happens in our lives, we will fight through it together.\n\nAlways us against the world.\n\nHappy Birthday, Jilju. I love you.",
       icon: "cake",
     },
   ] as Milestone[],
@@ -199,25 +225,25 @@ export const siteConfig = {
       id: "miss-me",
       title: "Open When You Miss Me",
       message:
-        "Hey, love.\n\nIf you're reading this because the distance feels loud tonight — know that I'm carrying you with me, in every quiet minute.\n\nClose your eyes. Imagine my hand in yours. I'm already on my way back to that feeling.\n\nI miss you too. Always.",
+        "Ettaa...\n\nIf you're reading this because the distance feels loud tonight — know that I'm carrying you with me, in every quiet minute.\n\nClose your eyes. Imagine my hand in your cheek. I'm already on my way back to that feeling.\n\nI miss you too. Always.",
     },
     {
       id: "feeling-low",
       title: "Open When You're Feeling Low",
       message:
-        "My love,\n\nYou don't have to be strong for me right now. You can rest. You can feel everything.\n\nThis hard day is not who you are — it's only weather passing through. And I'll still be here when the sky clears.\n\nI'm proud of you for existing through it.",
+        "Jiljuuu...,\n\nYou don't have to be strong for me right now. You can rest. You can feel everything.\n\nThis hard day is not who you are — it's only weather passing through. And I'll still be here when the sky clears.\n\nI'm proud of you for existing through it.",
     },
     {
       id: "need-smile",
       title: "Open When You Need a Smile",
       message:
-        "Quick reminder:\n\nYou once made me laugh so hard I forgot what we were even talking about. That version of us still exists.\n\nAlso — your face is objectively my favorite view. Scientifically proven. By me. Repeatedly.\n\nSmile for me?",
+        "Quick reminder:\n\nYou once made me laugh so hard I forgot what we were even talking about. That version of us still exists.\n\nAlso — your face is objectively my favorite view. Scientifically proven. By me. Repeatedly.\n\nYes, you are my 360° always ...\nSmile for me?",
     },
     {
       id: "cant-sleep",
       title: "Open When You Can't Sleep",
       message:
-        "It's late, and your mind is probably wandering.\n\nBreathe with me for a second. In... and out...\n\nWherever you are, I hope you feel wrapped in something soft — like knowing someone loves you in the dark, without needing a reason.\n\nSleep when you're ready. I'll still love you in the morning.",
+        "It's late, and your mind is probably wandering.\n\nBreathe with me for a second. In... and out...\n\nWherever you are, I hope you feel wrapped in my arms — like I always hug and cuddle you.\n\nSleep when you're ready. I'll always love you.",
     },
     {
       id: "reminder",
@@ -239,9 +265,9 @@ export const siteConfig = {
     "In every sky, I'd still look for you.",
     "You turned my ordinary into constellation.",
     "I'd choose this love a thousand times.",
-    "Your name feels like home in my mouth.",
+    "You are my 360°.",
     "Even the quiet between us is golden.",
-    "Forever started the day I met you.",
+    "You are my favourite person in the universe.",
   ],
 
   // --- Future dreams ---
@@ -267,9 +293,10 @@ export const siteConfig = {
       icon: "utensils",
     },
     {
-      title: "Dance under the stars",
-      description: "No stage, no audience — just two people and a sky full of witnesses.",
-      icon: "music",
+      title: "A night walk",
+      description:
+        "An empty road, no crowd — only you and me, holding hands together on a long walk.",
+      icon: "walk",
     },
     {
       title: "Make a thousand more memories",
@@ -282,7 +309,7 @@ export const siteConfig = {
   cakeWishMessage:
     "Whatever you wished for,\nI hope this year brings you even more.",
   surpriseMessage:
-    "Here's a little promise wrapped like a gift: I will keep choosing you — on the bright days, the quiet days, and every birthday still waiting for us.",
+    "Here's a little promise wrapped like a gift: I will keep choosing you — on the bright days, the quiet days, and every birthday still waiting for us.\n\nAlways us against the world.",
 
   // --- Final letter ---
   finalLetter: `Happy birthday, my love.
@@ -305,7 +332,7 @@ we haven't made yet.
 Happy birthday, my favorite person.
 
 Forever yours,
-[GIRLFRIEND_NAME]`,
+Meghanandhana`,
 
   footerNote: "Made with all my love ♡",
 } as const;

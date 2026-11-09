@@ -12,6 +12,7 @@ export function MemoryGallery() {
   const reduceMotion = useReducedMotion();
   const photos = siteConfig.photos;
   const featured = photos.find((p) => p.featured) ?? photos[0];
+  const gridPhotos = photos.filter((p) => p !== featured);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const close = useCallback(() => setActiveIndex(null), []);
@@ -99,48 +100,57 @@ export function MemoryGallery() {
         ) : null}
 
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-          {photos.map((photo, index) => (
-            <motion.button
-              key={`${photo.src}-${index}`}
-              type="button"
-              onClick={() => setActiveIndex(index)}
-              className={cn(
-                "mb-4 block w-full break-inside-avoid overflow-hidden text-left transition",
-                photo.polaroid
-                  ? "rounded-sm bg-[#f7ebe0] p-3 pb-8 shadow-lg rotate-[-1deg] hover:rotate-0"
-                  : "rounded-2xl border border-champagne/15 glass-card"
-              )}
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: (index % 3) * 0.06 }}
-              aria-label={`Open photo: ${photo.alt}`}
-            >
-              <div
+          {gridPhotos.map((photo, index) => {
+            const realIndex = photos.indexOf(photo);
+            return (
+              <motion.button
+                key={`${photo.src}-${realIndex}`}
+                type="button"
+                onClick={() => setActiveIndex(realIndex)}
                 className={cn(
-                  "relative overflow-hidden",
-                  photo.polaroid ? "aspect-[4/5]" : index % 3 === 0 ? "aspect-[4/5]" : "aspect-[5/4]",
-                  photo.polaroid ? "" : "rounded-2xl"
+                  "mb-4 block w-full break-inside-avoid overflow-hidden text-left transition",
+                  photo.polaroid
+                    ? "rounded-sm bg-[#f7ebe0] p-3 pb-8 shadow-lg rotate-[-1deg] hover:rotate-0"
+                    : "rounded-2xl border border-champagne/15 glass-card"
                 )}
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, delay: (index % 3) * 0.06 }}
+                aria-label={`Open photo: ${photo.alt}`}
               >
-                <PhotoFallback
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  imageClassName="object-cover transition duration-700 hover:scale-105"
-                />
-              </div>
-              <p
-                className={cn(
-                  "mt-3 text-sm leading-relaxed",
-                  photo.polaroid ? "px-1 text-[#4a3540] font-serif" : "px-4 pb-4 text-muted"
-                )}
-              >
-                {photo.caption}
-              </p>
-            </motion.button>
-          ))}
+                <div
+                  className={cn(
+                    "relative overflow-hidden",
+                    photo.polaroid
+                      ? "aspect-[4/5]"
+                      : index % 3 === 0
+                        ? "aspect-[4/5]"
+                        : "aspect-[5/4]",
+                    photo.polaroid ? "" : "rounded-2xl"
+                  )}
+                >
+                  <PhotoFallback
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    imageClassName="object-cover transition duration-700 hover:scale-105"
+                  />
+                </div>
+                <p
+                  className={cn(
+                    "mt-3 text-sm leading-relaxed",
+                    photo.polaroid
+                      ? "px-1 text-[#4a3540] font-serif"
+                      : "px-4 pb-4 text-muted"
+                  )}
+                >
+                  {photo.caption}
+                </p>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
 

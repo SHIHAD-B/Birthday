@@ -10,10 +10,22 @@ All personal content lives in one file so you can customize names, dates, photos
 
 ```bash
 npm install
+```
+
+Create a `.env` file (see `.env.example`):
+
+```bash
+SITE_PASSWORD=your-secret-password
+```
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).  
+The site opens behind a password screen — enter `SITE_PASSWORD` to unlock (cookie lasts 30 days).
+
+On Vercel, add `SITE_PASSWORD` under **Project → Settings → Environment Variables**.
 
 Production build:
 
@@ -32,7 +44,7 @@ Edit **`src/data/siteConfig.ts`**.
 
 ```ts
 boyfriendName: "Alex",
-girlfriendName: "Sam",
+girlfriendName: "Meghanandhana",
 ```
 
 Also update the final letter signature — `[GIRLFRIEND_NAME]` is replaced automatically, or edit `finalLetter` directly.

@@ -7,20 +7,67 @@ import { siteConfig } from "@/data/siteConfig";
 import { SectionHeading } from "./SectionHeading";
 import { StarField } from "./StarField";
 
+/** Exactly 7 stars — all kept inside the rounded galaxy box */
 const STAR_POSITIONS = [
-  { top: "18%", left: "20%" },
-  { top: "28%", left: "68%" },
-  { top: "46%", left: "38%" },
-  { top: "58%", left: "78%" },
-  { top: "70%", left: "24%" },
-  { top: "35%", left: "50%" },
-  { top: "75%", left: "55%" },
-];
+  { x: 18, y: 20, size: 32, delay: "0s", duration: "3.2s" },
+  { x: 56, y: 14, size: 28, delay: "0.45s", duration: "3.7s" },
+  { x: 82, y: 32, size: 32, delay: "0.9s", duration: "3.1s" },
+  { x: 40, y: 38, size: 36, delay: "0.25s", duration: "3.5s" },
+  { x: 16, y: 56, size: 30, delay: "1.2s", duration: "4s" },
+  { x: 74, y: 58, size: 32, delay: "0.7s", duration: "2.9s" },
+  { x: 46, y: 70, size: 32, delay: "1.5s", duration: "3.4s" },
+] as const;
+
+function GalaxyStar({
+  id,
+  tone,
+}: {
+  id: string;
+  tone: "gold" | "rose" | "ivory";
+}) {
+  const glowId = `galaxy-glow-${id}`;
+  const fill =
+    tone === "rose" ? "#D9A5AD" : tone === "ivory" ? "#FFF6ED" : "#E8C89E";
+
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" className="overflow-visible">
+      <defs>
+        <radialGradient id={glowId} cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="35%" stopColor={fill} />
+          <stop offset="100%" stopColor={fill} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="32" cy="32" r="20" fill={`url(#${glowId})`} opacity="0.85" />
+      <path
+        d="M32 2 L37 27 L62 32 L37 37 L32 62 L27 37 L2 32 L27 27 Z"
+        fill="#FFF6ED"
+      />
+      <path
+        d="M32 12 L34 30 L52 32 L34 34 L32 52 L30 34 L12 32 L30 30 Z"
+        fill={fill}
+      />
+      <circle cx="32" cy="32" r="3.2" fill="#FFFFFF" />
+    </svg>
+  );
+}
 
 export function LittleUniverse() {
   const reduceMotion = useReducedMotion();
   const messages = siteConfig.starMessages;
   const [active, setActive] = useState<number | null>(null);
+  const tones = [
+    "gold",
+    "rose",
+    "ivory",
+    "gold",
+    "rose",
+    "ivory",
+    "gold",
+  ] as const;
+
+  // Hard guarantee: always 7 buttons
+  const stars = STAR_POSITIONS;
 
   return (
     <section
@@ -38,47 +85,50 @@ export function LittleUniverse() {
         </h2>
 
         <motion.div
-          className="relative mx-auto h-[420px] max-w-3xl overflow-hidden rounded-[2rem] border border-champagne/20 bg-[radial-gradient(circle_at_center,#151B30_0%,#0B1020_70%)]"
+          className="relative mx-auto aspect-[4/5] w-full max-w-3xl sm:aspect-[5/4]"
           initial={reduceMotion ? false : { opacity: 0, scale: 0.98 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <p className="absolute left-0 right-0 top-4 z-10 text-center text-xs tracking-[0.2em] uppercase text-muted">
+          {/* Galaxy clipped to rounded frame */}
+          <div className="absolute inset-0 overflow-hidden rounded-[2rem] border border-champagne/20">
+            <div className="galaxy-sky absolute inset-0" aria-hidden="true">
+              <div className="galaxy-core" />
+              <div className="galaxy-arm galaxy-arm-a" />
+              <div className="galaxy-arm galaxy-arm-b" />
+              <div className="galaxy-dust" />
+              <StarField count={40} className="opacity-70" />
+            </div>
+          </div>
+
+          <p className="pointer-events-none absolute left-0 right-0 top-4 z-30 text-center text-xs tracking-[0.2em] uppercase text-muted">
             Tap a star to reveal a message
           </p>
 
-          {messages.slice(0, STAR_POSITIONS.length).map((message, index) => {
-            const pos = STAR_POSITIONS[index];
-            return (
+          {/* Stars inside the frame — inset keeps all 7 within the border */}
+          <div className="absolute inset-[16%] z-20 sm:inset-[14%]">
+            {stars.map((pos, index) => (
               <button
-                key={index}
+                key={`interactive-star-${index}`}
                 type="button"
-                className="absolute z-10 rounded-full focus-visible:outline-none"
-                style={{ top: pos.top, left: pos.left }}
+                className="sky-star absolute -translate-x-1/2 -translate-y-1/2 focus-visible:outline-none"
+                style={{
+                  top: `${pos.y}%`,
+                  left: `${pos.x}%`,
+                  width: pos.size,
+                  height: pos.size,
+                  ["--twinkle" as string]: pos.duration,
+                  ["--twinkle-delay" as string]: pos.delay,
+                  animation: reduceMotion ? "none" : undefined,
+                }}
                 onClick={() => setActive(index)}
-                aria-label={`Star ${index + 1}: reveal hidden message`}
+                aria-label={`Star ${index + 1} of ${stars.length}: reveal hidden message`}
               >
-                <span
-                  className="relative block h-4 w-4 rounded-full bg-champagne shadow-[0_0_16px_rgba(232,200,158,0.85)] transition hover:scale-125 sm:h-5 sm:w-5"
-                  aria-hidden="true"
-                >
-                  <span className="absolute inset-[-8px] rounded-full border border-champagne/25 animate-pulse-glow" />
-                </span>
+                <GalaxyStar id={String(index)} tone={tones[index]} />
               </button>
-            );
-          })}
-
-          {/* Constellation lines */}
-          <svg
-            className="absolute inset-0 h-full w-full opacity-30"
-            aria-hidden="true"
-          >
-            <line x1="22%" y1="20%" x2="40%" y2="48%" stroke="#A899C4" strokeWidth="1" />
-            <line x1="40%" y1="48%" x2="52%" y2="37%" stroke="#A899C4" strokeWidth="1" />
-            <line x1="52%" y1="37%" x2="70%" y2="30%" stroke="#E8C89E" strokeWidth="1" />
-            <line x1="40%" y1="48%" x2="26%" y2="72%" stroke="#D9A5AD" strokeWidth="1" />
-          </svg>
+            ))}
+          </div>
         </motion.div>
       </div>
 

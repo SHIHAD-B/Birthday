@@ -171,7 +171,7 @@ export function BirthdayCake() {
                 <X className="h-5 w-5" />
               </button>
               <p className="font-script text-3xl text-[#8b4a5a]">A little gift</p>
-              <p className="mt-4 font-serif text-lg leading-relaxed text-[#3a2a32]">
+              <p className="mt-4 font-serif text-lg leading-relaxed text-[#3a2a32] whitespace-pre-line">
                 {siteConfig.surpriseMessage}
               </p>
             </motion.div>
