@@ -26,7 +26,7 @@ export function BirthdayCake() {
   const [blown, setBlown] = useState(false);
   const [showGift, setShowGift] = useState(false);
 
-   const blowOut = () => {
+  const blowOut = () => {
     if (blown) return;
     setBlown(true);
     fireConfetti();
