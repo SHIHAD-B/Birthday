@@ -160,10 +160,10 @@ export const siteConfig = {
   // --- Timeline ---
   milestones: [
     {
-      date: "15 April 2025 · ~12:15 PM",
+      date: "14 May 2025",
       title: "The Day We Met",
       description:
-        "From that day, around 12:15 pm, we saw each other and got lost in each other's eyes. That was the first melting moment of our journey. Thank you for coming into my life — I love you.\n\nThat was a special day alle etta.... Enikk ippozhum oormmayind — Njan Preethi Silks il kayariyathum Shebinettane kandu. Then njn ettanu text cheythu \"Your frnd is here, Shebin I think\". Nn kelkkenda thamasam njn nokkumbol, dhoore ninn oral varunnu — minnayam pole kandu. Njn mind aakkiyilla. Then ettan staircase lott kayariyille — ah tym il ahn njn ettane nokkiyath. Ettan also enne nokkunnayrunu. That was our first eye contact. Heart beat ellam kooduthal aayrunu. Ntha athine parayendath — magic aano, soul connection aano — onnum ariyilla. It was very, very special to both of us.",
+        "The day we met was really special to me, because I had no idea I was going to meet the most important person in my life. That moment felt so special. I got butterflies in my stomach, and I still remember the eye contact we shared.",
       icon: "sparkles",
     },
     {
